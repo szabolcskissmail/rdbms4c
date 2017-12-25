@@ -1,6 +1,6 @@
 RDBMS4C
 
-Copyright (C) 2010  rdbms4c.org
+Copyright (C) 2010  Szabolcs Kiss
 
 Embedded, in memory database designed for C developers
 
