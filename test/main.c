@@ -90,7 +90,7 @@ void timer_10m(int pid)
     timer_pool_exit();
 }
 
-int main(int argc, char *argv[])
+int main2(int argc, char *argv[])
 {
     volatile int i;
     unsigned int *v_ui;
