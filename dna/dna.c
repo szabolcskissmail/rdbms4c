@@ -1,0 +1,88 @@
+/*
+     dna
+     Copyright (C) 2017  Szabolcs Kiss
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "dna.h"
+
+__db_table genbank_constructor()
+{
+    __db_primary_key primary_key;
+    __db_record_definition record_definition = db_create_record_definition(7);
+
+    db_set_record_definition_field(record_definition, GENBANK_seq_from, "seq_from", __NOT_NULL, __unsigned_int);
+    db_set_record_definition_field(record_definition, GENBANK_seq1, "seq1", __NOT_NULL, __char_array);
+    db_set_record_definition_field(record_definition, GENBANK_seq2, "seq2", __NOT_NULL, __char_array);
+    db_set_record_definition_field(record_definition, GENBANK_seq3, "seq3", __NOT_NULL, __char_array);
+    db_set_record_definition_field(record_definition, GENBANK_seq4, "seq4", __NOT_NULL, __char_array);
+    db_set_record_definition_field(record_definition, GENBANK_seq5, "seq5", __NOT_NULL, __char_array);
+    db_set_record_definition_field(record_definition, GENBANK_seq6, "seq6", __NOT_NULL, __char_array);
+
+    primary_key = db_create_pk(1);
+    db_set_index_field(primary_key, GENBANK_seq_from, 0, __asc);
+
+    return db_create_table(record_definition, primary_key);
+}
+
+__db_cursor genbank_insert(__db_cursor cursor, __genbank_s* genbank)
+{
+    __db_field db_field = db_insert_preparation(7);
+    db_insert_set_field(cursor, db_field, GENBANK_seq_from, &genbank->seq_from);
+    db_insert_set_field(cursor, db_field, GENBANK_seq1, genbank->seq1->str);
+    db_insert_set_field(cursor, db_field, GENBANK_seq2, genbank->seq2->str);
+    db_insert_set_field(cursor, db_field, GENBANK_seq3, genbank->seq3->str);
+    db_insert_set_field(cursor, db_field, GENBANK_seq4, genbank->seq4->str);
+    db_insert_set_field(cursor, db_field, GENBANK_seq5, genbank->seq5->str);
+    db_insert_set_field(cursor, db_field, GENBANK_seq6, genbank->seq6->str);
+
+    db_insert_into(cursor, db_field);
+    genbank_clear(genbank);
+    return cursor;
+}
+
+__db_cursor genbank_find(__db_cursor cursor, unsigned int seq_from)
+{
+    __db_key key = db_create_key(cursor);
+    db_set_key_field(key, GENBANK_seq_from, &seq_from);
+    db_find_by_key(key);
+    db_drop_key(key);
+    return cursor;
+}
+
+void genbank_clear(__genbank_s* genbank)
+{
+    genbank->seq_from = 0;
+
+    db_string_drop(genbank->seq1);
+    genbank->seq1 = NULL;
+
+    db_string_drop(genbank->seq2);
+    genbank->seq2 = NULL;
+
+    db_string_drop(genbank->seq3);
+    genbank->seq3 = NULL;
+
+    db_string_drop(genbank->seq4);
+    genbank->seq4 = NULL;
+
+    db_string_drop(genbank->seq5);
+    genbank->seq5 = NULL;
+
+    db_string_drop(genbank->seq6);
+    genbank->seq6 = NULL;
+}
+
+

@@ -16,6 +16,7 @@
 */
 
 #include "../src/db.h"
+#include "dna.h"
 
 int main(int argc, char *argv[])
 {
