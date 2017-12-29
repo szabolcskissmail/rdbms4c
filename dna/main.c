@@ -20,5 +20,34 @@
 
 int main(int argc, char *argv[])
 {
+    __db_table genbank = genbank_constructor();
+    __db_cursor cursor = db_create_cursor(genbank, GENBANK_PRIMARY_KEY);
+    __genbank_s genbank_s;
+    __db_record record;
+
+    genbank_s.seq_from = 1;
+    genbank_s.seq1 = db_string_create("ACGTACGTAT");
+    genbank_s.seq2 = db_string_create("ACGTACGTAT");
+    genbank_s.seq3 = db_string_create("ACGTACGTAT");
+    genbank_s.seq4 = db_string_create("ACGTACGTAT");
+    genbank_s.seq5 = db_string_create("ACGTACGTAT");
+    genbank_s.seq6 = db_string_create("ACGTACGTAT");
+
+    genbank_insert(cursor, &genbank_s);
+
+    __for_cursor_loop(record, cursor)
+        printf("%i %s %s %s %s %s %s \n",
+           get_GENBANK_seq_from(record),
+               get_GENBANK_seq1(record),
+               get_GENBANK_seq2(record),
+               get_GENBANK_seq3(record),
+               get_GENBANK_seq4(record),
+               get_GENBANK_seq5(record),
+               get_GENBANK_seq6(record));
+    __end_loop(record, cursor)
+
+    db_drop_cursor(cursor);
+    db_drop_table(genbank);
+
     return 0;
 }

@@ -21,6 +21,8 @@
 
 #include "../src/db.h"
 
+#define GENBANK_PRIMARY_KEY 0
+
 #define GENBANK_seq_from 0
 #define GENBANK_seq1 1
 #define GENBANK_seq2 2

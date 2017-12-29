@@ -32,7 +32,7 @@ __db_table genbank_constructor()
     db_set_record_definition_field(record_definition, GENBANK_seq6, "seq6", __NOT_NULL, __char_array);
 
     primary_key = db_create_pk(1);
-    db_set_index_field(primary_key, GENBANK_seq_from, 0, __asc);
+    db_set_index_field(primary_key, GENBANK_seq_from, GENBANK_PRIMARY_KEY, __asc);
 
     return db_create_table(record_definition, primary_key);
 }
