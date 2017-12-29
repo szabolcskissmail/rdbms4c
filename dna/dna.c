@@ -89,7 +89,7 @@ void genbank_print(__db_cursor cursor)
 {
     __db_record record;
     __for_cursor_loop(record, cursor)
-        printf("%i %s %s %s %s %s %s \n",
+        printf("%.10i %s %s %s %s %s %s \n",
            get_GENBANK_seq_from(record),
                get_GENBANK_seq1(record),
                get_GENBANK_seq2(record),
