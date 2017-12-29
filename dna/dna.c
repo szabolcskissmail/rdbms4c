@@ -85,4 +85,19 @@ void genbank_clear(__genbank_s* genbank)
     genbank->seq6 = NULL;
 }
 
+void genbank_print(__db_cursor cursor)
+{
+    __db_record record;
+    __for_cursor_loop(record, cursor)
+        printf("%i %s %s %s %s %s %s \n",
+           get_GENBANK_seq_from(record),
+               get_GENBANK_seq1(record),
+               get_GENBANK_seq2(record),
+               get_GENBANK_seq3(record),
+               get_GENBANK_seq4(record),
+               get_GENBANK_seq5(record),
+               get_GENBANK_seq6(record));
+    __end_loop(record, cursor)
+}
+
 
