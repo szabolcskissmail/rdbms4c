@@ -39,6 +39,14 @@
 #define get_GENBANK_seq5(p_record) db_get_field_as_char_array(p_record, GENBANK_seq5)
 #define get_GENBANK_seq6(p_record) db_get_field_as_char_array(p_record, GENBANK_seq6)
 
+
+typedef struct __genome_seq_ss {
+    unsigned long length;
+    __db_string sequence;
+} __genome_seq_s;
+
+typedef __genome_seq_s* __genome_seq;
+
 typedef struct __genbank_ss {
     unsigned int seq_from;
     __db_string seq1;
