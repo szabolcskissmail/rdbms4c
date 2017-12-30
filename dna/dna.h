@@ -21,6 +21,16 @@
 
 #include "../src/db.h"
 
+#define DNA_T 't'
+#define DNA_A 'a'
+#define DNA_C 'c'
+#define DNA_G 'g'
+
+#define DNA_T_DESC "thymine"
+#define DNA_A_DESC "adenine"
+#define DNA_C_DESC "cytosine"
+#define DNA_G_DESC "guanine"
+
 #define GENBANK_PRIMARY_KEY 0
 
 #define GENBANK_seq_from 0
@@ -40,13 +50,6 @@
 #define get_GENBANK_seq6(p_record) db_get_field_as_char_array(p_record, GENBANK_seq6)
 
 
-typedef struct __genome_seq_ss {
-    unsigned long length;
-    __db_string sequence;
-} __genome_seq_s;
-
-typedef __genome_seq_s* __genome_seq;
-
 typedef struct __genbank_ss {
     unsigned int seq_from;
     __db_string seq1;
@@ -57,6 +60,8 @@ typedef struct __genbank_ss {
     __db_string seq6;
 } __genbank_s;
 
+
+__db_string random_dna(int length);
 
 __db_table genbank_constructor();
 

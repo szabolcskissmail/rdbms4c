@@ -18,6 +18,26 @@
 
 #include "dna.h"
 
+#include <time.h>
+#include <stdlib.h>
+
+__db_string random_dna(int length)
+{
+    char random_array[4] = {DNA_T, DNA_A, DNA_C, DNA_G};
+    __db_string result = NULL;
+    char* sequence = malloc((sizeof(char) * length) + 1);
+    int random_int;
+    srand(time(NULL));
+    int i = 0;
+    for(i = 0; i < length; i++) {
+        random_int = rand() % 4;
+        sequence[i] = random_array[random_int];
+    }
+    sequence[length] = 0;
+    result = db_string_create(sequence);
+    return result;
+}
+
 __db_table genbank_constructor()
 {
     __db_primary_key primary_key;
@@ -89,14 +109,14 @@ void genbank_print(__db_cursor cursor)
 {
     __db_record record;
     __for_cursor_loop(record, cursor)
-        printf("%.10i %s %s %s %s %s %s \n",
+    printf("%.10i %s %s %s %s %s %s \n",
            get_GENBANK_seq_from(record),
-               get_GENBANK_seq1(record),
-               get_GENBANK_seq2(record),
-               get_GENBANK_seq3(record),
-               get_GENBANK_seq4(record),
-               get_GENBANK_seq5(record),
-               get_GENBANK_seq6(record));
+           get_GENBANK_seq1(record),
+           get_GENBANK_seq2(record),
+           get_GENBANK_seq3(record),
+           get_GENBANK_seq4(record),
+           get_GENBANK_seq5(record),
+           get_GENBANK_seq6(record));
     __end_loop(record, cursor)
 }
 

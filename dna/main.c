@@ -25,12 +25,12 @@ int main(int argc, char *argv[])
     __genbank_s genbank_s;
 
     genbank_s.seq_from = 1;
-    genbank_s.seq1 = db_string_create("ACGTACGTAT");
-    genbank_s.seq2 = db_string_create("ACGTACGTAT");
-    genbank_s.seq3 = db_string_create("ACGTACGTAT");
-    genbank_s.seq4 = db_string_create("ACGTACGTAT");
-    genbank_s.seq5 = db_string_create("ACGTACGTAT");
-    genbank_s.seq6 = db_string_create("ACGTACGTAT");
+    genbank_s.seq1 = random_dna(10);
+    genbank_s.seq2 = random_dna(10);
+    genbank_s.seq3 = random_dna(10);
+    genbank_s.seq4 = random_dna(10);
+    genbank_s.seq5 = random_dna(10);
+    genbank_s.seq6 = random_dna(10);
 
     genbank_insert(cursor, &genbank_s);
 
