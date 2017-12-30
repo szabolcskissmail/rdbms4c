@@ -20,7 +20,7 @@
 
 int main(int argc, char *argv[])
 {
-    __db_table genbank = genbank_from_dna(random_dna(11));
+    __db_table genbank = genbank_from_dna(random_dna(534));
     __db_cursor cursor = db_create_cursor(genbank, GENBANK_PRIMARY_KEY);
 
     genbank_print(cursor);

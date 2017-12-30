@@ -79,11 +79,11 @@ __db_table genbank_from_dna(__db_string dna)
         if(dna->str[i] == 0) {
             end = 1;
         } else {
-            if(j == 61) {
+            if(j == 60) {
                 j = 0;
                 k = 0;
             }
-            if(j == 0 || j == 11 || j == 21 || j == 31 || j == 41 || j == 51) {
+            if(j == 0 || j == 10 || j == 20 || j == 30 || j == 40 || j == 50) {
                 if(seq != NULL) {
                     free(seq);
                 }
@@ -91,22 +91,22 @@ __db_table genbank_from_dna(__db_string dna)
                 seq = malloc(sizeof(char) * 11);
             }
             seq[k] = dna->str[i];
-            if(j == 10) {
+            if(j == 9) {
                 seq[k + 1] = 0;
                 genbank_s.seq1 = db_string_create(seq);
-            } else if(j == 20) {
+            } else if(j == 19) {
                 seq[k + 1] = 0;
                 genbank_s.seq2 = db_string_create(seq);
-            } else if(j == 30) {
+            } else if(j == 29) {
                 seq[k + 1] = 0;
                 genbank_s.seq3 = db_string_create(seq);
-            } else if(j == 40) {
+            } else if(j == 39) {
                 seq[k + 1] = 0;
                 genbank_s.seq4 = db_string_create(seq);
-            } else if(j == 50) {
+            } else if(j == 49) {
                 seq[k + 1] = 0;
                 genbank_s.seq5 = db_string_create(seq);
-            } else if(j == 60) {
+            } else if(j == 59) {
                 seq[k + 1] = 0;
                 genbank_s.seq6 = db_string_create(seq);
                 genbank_s.seq_from = seq_from;
@@ -118,7 +118,7 @@ __db_table genbank_from_dna(__db_string dna)
             k++;
         }
     }
-    if(j > 0 && j < 61) {
+    if(j > 0 && j < 60) {
         if(j <= 10) {
             seq[k] = 0;
             genbank_s.seq1 = db_string_create(seq);
