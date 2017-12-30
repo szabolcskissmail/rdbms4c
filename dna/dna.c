@@ -57,6 +57,94 @@ __db_table genbank_constructor()
     return db_create_table(record_definition, primary_key);
 }
 
+__db_table genbank_from_dna(__db_string dna)
+{
+    __db_table result = genbank_constructor();
+    __db_cursor cursor = db_create_cursor(result, GENBANK_PRIMARY_KEY);
+    __genbank_s genbank_s;
+    char end = 0;
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    char* seq = NULL;
+    int seq_from = 1;
+    genbank_s.seq1 = NULL;
+    genbank_s.seq2 = NULL;
+    genbank_s.seq3 = NULL;
+    genbank_s.seq4 = NULL;
+    genbank_s.seq5 = NULL;
+    genbank_s.seq6 = NULL;
+    genbank_clear(&genbank_s);
+    while(!end) {
+        if(dna->str[i] == 0) {
+            end = 1;
+        } else {
+            if(j == 61) {
+                j = 0;
+                k = 0;
+            }
+            if(j == 0 || j == 11 || j == 21 || j == 31 || j == 41 || j == 51) {
+                if(seq != NULL) {
+                    free(seq);
+                }
+                k = 0;
+                seq = malloc(sizeof(char) * 11);
+            }
+            seq[k] = dna->str[i];
+            if(j == 10) {
+                seq[k + 1] = 0;
+                genbank_s.seq1 = db_string_create(seq);
+            } else if(j == 20) {
+                seq[k + 1] = 0;
+                genbank_s.seq2 = db_string_create(seq);
+            } else if(j == 30) {
+                seq[k + 1] = 0;
+                genbank_s.seq3 = db_string_create(seq);
+            } else if(j == 40) {
+                seq[k + 1] = 0;
+                genbank_s.seq4 = db_string_create(seq);
+            } else if(j == 50) {
+                seq[k + 1] = 0;
+                genbank_s.seq5 = db_string_create(seq);
+            } else if(j == 60) {
+                seq[k + 1] = 0;
+                genbank_s.seq6 = db_string_create(seq);
+                genbank_s.seq_from = seq_from;
+                genbank_insert(cursor, &genbank_s);
+                seq_from += 60;
+            }
+            i++;
+            j++;
+            k++;
+        }
+    }
+    if(j > 0 && j < 61) {
+        if(j <= 10) {
+            seq[k] = 0;
+            genbank_s.seq1 = db_string_create(seq);
+        } else if(j > 10 && j <= 20) {
+            seq[k] = 0;
+            genbank_s.seq2 = db_string_create(seq);
+        } else if(j > 20 && j <= 30) {
+            seq[k] = 0;
+            genbank_s.seq3 = db_string_create(seq);
+        } else if(j > 30 && j <= 40) {
+            seq[k] = 0;
+            genbank_s.seq4 = db_string_create(seq);
+        } else if(j > 40 && j <= 50) {
+            seq[k] = 0;
+            genbank_s.seq5 = db_string_create(seq);
+        } else if(j > 50 && j <= 60) {
+            seq[k] = 0;
+            genbank_s.seq6 = db_string_create(seq);
+        }
+        genbank_s.seq_from = seq_from;
+        genbank_insert(cursor, &genbank_s);
+    }
+    db_drop_cursor(cursor);
+    return result;
+}
+
 __db_cursor genbank_insert(__db_cursor cursor, __genbank_s* genbank)
 {
     __db_field db_field = db_insert_preparation(7);
@@ -85,24 +173,18 @@ __db_cursor genbank_find(__db_cursor cursor, unsigned int seq_from)
 void genbank_clear(__genbank_s* genbank)
 {
     genbank->seq_from = 0;
-
     db_string_drop(genbank->seq1);
-    genbank->seq1 = NULL;
-
+    genbank->seq1 = db_string_create("");
     db_string_drop(genbank->seq2);
-    genbank->seq2 = NULL;
-
+    genbank->seq2 = db_string_create("");
     db_string_drop(genbank->seq3);
-    genbank->seq3 = NULL;
-
+    genbank->seq3 = db_string_create("");
     db_string_drop(genbank->seq4);
-    genbank->seq4 = NULL;
-
+    genbank->seq4 = db_string_create("");
     db_string_drop(genbank->seq5);
-    genbank->seq5 = NULL;
-
+    genbank->seq5 = db_string_create("");
     db_string_drop(genbank->seq6);
-    genbank->seq6 = NULL;
+    genbank->seq6 = db_string_create("");
 }
 
 void genbank_print(__db_cursor cursor)

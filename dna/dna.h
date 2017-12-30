@@ -65,6 +65,8 @@ __db_string random_dna(int length);
 
 __db_table genbank_constructor();
 
+__db_table genbank_from_dna(__db_string dna);
+
 __db_cursor genbank_insert(__db_cursor cursor, __genbank_s* genbank);
 
 __db_cursor genbank_find(__db_cursor cursor, unsigned int seq_from);
@@ -72,5 +74,6 @@ __db_cursor genbank_find(__db_cursor cursor, unsigned int seq_from);
 void genbank_clear(__genbank_s* genbank);
 
 void genbank_print(__db_cursor cursor);
+
 
 #endif

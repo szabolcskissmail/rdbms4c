@@ -20,19 +20,8 @@
 
 int main(int argc, char *argv[])
 {
-    __db_table genbank = genbank_constructor();
+    __db_table genbank = genbank_from_dna(random_dna(11));
     __db_cursor cursor = db_create_cursor(genbank, GENBANK_PRIMARY_KEY);
-    __genbank_s genbank_s;
-
-    genbank_s.seq_from = 1;
-    genbank_s.seq1 = random_dna(10);
-    genbank_s.seq2 = random_dna(10);
-    genbank_s.seq3 = random_dna(10);
-    genbank_s.seq4 = random_dna(10);
-    genbank_s.seq5 = random_dna(10);
-    genbank_s.seq6 = random_dna(10);
-
-    genbank_insert(cursor, &genbank_s);
 
     genbank_print(cursor);
 
