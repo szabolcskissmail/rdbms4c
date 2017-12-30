@@ -141,6 +141,9 @@ __db_table genbank_from_dna(__db_string dna)
         genbank_s.seq_from = seq_from;
         genbank_insert(cursor, &genbank_s);
     }
+    if(seq != NULL) {
+        free(seq);
+    }
     db_drop_cursor(cursor);
     return result;
 }
