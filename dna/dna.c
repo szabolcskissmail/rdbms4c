@@ -35,6 +35,7 @@ __db_string random_dna(int length)
     }
     sequence[length] = 0;
     result = db_string_create(sequence);
+    free(sequence);
     return result;
 }
 
