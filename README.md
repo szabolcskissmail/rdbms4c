@@ -21,4 +21,4 @@ Learn more from reference guide:
  - Data safety
  - String support
 
-DNA library
+Deoxyribonucleic acid (DNA) APIs
