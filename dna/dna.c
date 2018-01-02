@@ -85,7 +85,7 @@ __db_table genbank_from_dna(__db_string dna)
                 j = 0;
                 k = 0;
             }
-            if(j == 0 || j == 10 || j == 20 || j == 30 || j == 40 || j == 50) {
+            if(j % 10 == 0) {
                 if(seq != NULL) {
                     free(seq);
                 }
