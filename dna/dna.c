@@ -1,6 +1,7 @@
 /*
-     dna
-     Copyright (C) 2017  Szabolcs Kiss
+    Deoxyribonucleic acid (DNA)
+
+    Copyright (C) 2017  Szabolcs Kiss
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,14 +22,14 @@
 #include <time.h>
 #include <stdlib.h>
 
-__db_string random_dna(int length)
+__db_string random_dna(unsigned long length)
 {
     char random_array[4] = {DNA_T, DNA_A, DNA_C, DNA_G};
     __db_string result = NULL;
-    char* sequence = malloc((sizeof(char) * length) + 1);
+    char* sequence = malloc((sizeof(char) * length) + 1L);
     int random_int;
     srand(time(NULL));
-    int i = 0;
+    unsigned long i = 0;
     for(i = 0; i < length; i++) {
         random_int = rand() % 4;
         sequence[i] = random_array[random_int];
@@ -64,7 +65,7 @@ __db_table genbank_from_dna(__db_string dna)
     __db_cursor cursor = db_create_cursor(result, GENBANK_PRIMARY_KEY);
     __genbank_s genbank_s;
     char end = 0;
-    int i = 0;
+    unsigned long i = 0L;
     int j = 0;
     int k = 0;
     char* seq = NULL;

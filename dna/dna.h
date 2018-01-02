@@ -1,5 +1,6 @@
 /*
-    dna
+    Deoxyribonucleic acid (DNA)
+
     Copyright (C) 2017  Szabolcs Kiss
 
     This program is free software: you can redistribute it and/or modify
@@ -61,7 +62,7 @@ typedef struct __genbank_ss {
 } __genbank_s;
 
 
-__db_string random_dna(int length);
+__db_string random_dna(unsigned long length);
 
 __db_table genbank_constructor();
 
