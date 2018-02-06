@@ -62,3 +62,18 @@ void therm_events_constructor()
     cursor = db_create_cursor(table, PRIMARY_KEY);
 }
 ```
+
+```c
+    cursor = db_create_cursor(get_therm_events_table(), THERM_EVENTS_event_type_fk_idx);
+    __for_cursor_loop(record, cursor)
+        printf("Evnt type: %i - %s, Event: %i \n",
+           get_THERM_EVENT_TYPES_id(
+               get_THERM_EVENTS_event_type_fk(record)),
+           get_THERM_EVENT_TYPES_name(
+               get_THERM_EVENTS_event_type_fk(record)),
+           get_THERM_EVENTS_id(record)
+          );
+    __end_loop(record, cursor)
+
+    db_drop_cursor(cursor);
+```
