@@ -21,9 +21,21 @@ Learn more from reference guide:
  - Data safety
  - String support
 
-# Deoxyribonucleic acid (DNA) APIs
+Deoxyribonucleic acid (DNA) APIs
+
+
 
 Examples how to create RDBMS tables with **RDBMS4C**:
+
+```c
+#define THERM_EVENTS_id 0
+#define THERM_EVENTS_event_type_fk 1
+
+#define THERM_EVENTS_event_type_fk_idx 1
+
+#define get_THERM_EVENTS_id(p_record) db_get_field_as_unsigned_long(p_record, THERM_EVENTS_id)
+#define get_THERM_EVENTS_event_type_fk(p_record) db_get_field_as_foreign_key_record(p_record, THERM_EVENTS_event_type_fk)
+```
 
 ```c
 void therm_events_constructor()
