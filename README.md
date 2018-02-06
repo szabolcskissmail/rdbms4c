@@ -1,4 +1,4 @@
-#RDBMS4C
+# RDBMS4C
 
 *Copyright (C) 2010  Szabolcs Kiss*
 
@@ -21,7 +21,7 @@ Learn more from reference guide:
  - Data safety
  - String support
 
-#Deoxyribonucleic acid (DNA) APIs
+# Deoxyribonucleic acid (DNA) APIs
 
 Examples how to create RDBMS tables with **RDBMS4C**:
 
